@@ -1,1 +1,1 @@
-# go-walk
+env GOOS=linux go build
