@@ -1,1 +1,3 @@
-env GOOS=linux go build
+```bash
+go run main.go
+```
