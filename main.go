@@ -27,7 +27,7 @@ func main() {
 
 	fmt.Println("Server start listening..")
 
-	http.ListenAndServe("localhost:8080", mux)
+	http.ListenAndServe("0.0.0.0:8080", mux)
 }
 
 func deleteUser(w http.ResponseWriter, r *http.Request) {

@@ -1,15 +1,18 @@
-run app
+#### run app
 ```bash
 go run main.go
 ```
 
-kind registry examples
+#### kind registry examples
 ```bash
-docker tag go-walk:latest localhost:5001/go-walk:latest
-docker push localhost:5001/go-walk:latest
+docker build --tag go-walk .
+docker tag go-walk:latest localhost:5001/go-walk:2.0
+docker push localhost:5001/go-walk:2.0
 ```
+`kind-with-registry.sh` contains `cluster.yaml`
 
-deploy in kind cluster
+
+#### deploy to kind cluster
 ```bash
-kubectl apply -f deployment.yaml -n default
+kubectl apply -f go-walk.yaml
 ```

@@ -1,0 +1,45 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: go-kube-example-app
+  labels:
+    app: go-kube-example
+spec:
+  containers:
+    - command:
+        - /gowalk
+        - serve-hostname
+        - --http=true
+        - --port=8080
+      image: localhost:5001/go-walk:2.0
+      name: go-kube-example-app
+      imagePullPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: go-kube-example-service
+spec:
+  selector:
+    app: go-kube-example
+  ports:
+    # Default port used by the image
+    - port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+spec:
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: go-kube-example-service
+                port:
+                  number: 8080
+---
