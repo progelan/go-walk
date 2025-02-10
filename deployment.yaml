@@ -1,0 +1,26 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: go-kube-example-deployment
+  labels:
+    app: go-kube-example
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-kube-example
+  template:
+    metadata:
+      labels:
+        app: go-kube-example
+    spec:
+      containers:
+        - name: go-kube-example
+          image: localhost:5001/go-walk:latest
+          command:
+          - /gowalk
+          - serve-hostname
+          - --http=true
+          - --port=8080
+          imagePullPolicy: IfNotPresent

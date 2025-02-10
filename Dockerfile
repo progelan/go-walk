@@ -8,9 +8,8 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /application
+RUN CGO_ENABLED=0 GOOS=linux go build -o /gowalk
 
 EXPOSE 8080
 
-# Run
-CMD ["/application"]
+CMD ["/gowalk"]
