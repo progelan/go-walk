@@ -16,3 +16,18 @@ docker push localhost:5001/go-walk:2.0
 ```bash
 kubectl apply -f go-walk.yaml
 ```
+
+#### port forward pod
+```shell
+kubectl port-forward go-kube-example-app 40000:40000
+```
+
+#### troubleshooting
+```
+/dlv: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /dlv)
+/dlv: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /dlv)
+```
+переключитесь на образ, основанный на glibc, например debian или ubuntu.
+```Dockerfile
+FROM golang:1.20-bullseye
+```

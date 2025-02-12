@@ -7,11 +7,9 @@ metadata:
 spec:
   containers:
     - command:
-        - /gowalk
-        - serve-hostname
-        - --http=true
-        - --port=8080
-      image: localhost:5001/go-walk:2.0
+        ["/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "--accept-multiclient", "exec", "/server"]
+#        ["/gowalk", "serve-hostname", "--http=true", "--port=8080"]
+      image: localhost:5001/go-walk-debug:1.0
       name: go-kube-example-app
       imagePullPolicy: Always
 ---
@@ -23,7 +21,6 @@ spec:
   selector:
     app: go-kube-example
   ports:
-    # Default port used by the image
     - port: 8080
 ---
 apiVersion: networking.k8s.io/v1
