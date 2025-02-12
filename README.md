@@ -31,3 +31,8 @@ kubectl port-forward go-kube-example-app 40000:40000
 ```Dockerfile
 FROM golang:1.20-bullseye
 ```
+
+#### air run
+```shell
+docker run --rm -p 8080:8080 -p 40000:40000 -v $(pwd):/app go-walk-air:latest
+```
