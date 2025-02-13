@@ -49,6 +49,14 @@ docker run --rm -p 8080:8080 -p 40000:40000 -v $(pwd):/app go-walk-air:latest
 ```
 
 
-```shell
-netstat -tuln 
+```
+root@go-kube-example-app:/# netstat -tuln 
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp6       0      0 :::40000                :::*                    LISTEN     
+root@go-kube-example-app:/# netstat -tuln 
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp6       0      0 :::40000                :::*                    LISTEN     
+tcp6       0      0 :::8080                 :::*                    LISTEN   
 ```
