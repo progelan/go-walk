@@ -3,13 +3,24 @@
 go run main.go
 ```
 
-#### kind registry examples
-```bash
-docker build --tag go-walk .
-docker tag go-walk:latest localhost:5001/go-walk:2.0
-docker push localhost:5001/go-walk:2.0
+#### install kind
+```
+./kind-with-registry.sh
 ```
 `kind-with-registry.sh` contains `cluster.yaml`
+
+
+#### install nginx
+```
+kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
+```
+
+#### kind registry examples
+```bash
+docker build --tag go-walk-delve -f debug.delve.Dockerfile .
+docker tag go-walk-delve:latest localhost:5001/go-walk-delve:1.0
+docker push localhost:5001/go-walk-delve:1.0
+```
 
 
 #### deploy to kind cluster
@@ -19,7 +30,7 @@ kubectl apply -f go-walk.yaml
 
 #### port forward pod
 ```shell
-kubectl port-forward go-kube-example-app 40000:40000
+kubectl port-forward go-kube-example-app 40000:40000 8080:8080
 ```
 
 #### troubleshooting
@@ -35,4 +46,9 @@ FROM golang:1.20-bullseye
 #### air run
 ```shell
 docker run --rm -p 8080:8080 -p 40000:40000 -v $(pwd):/app go-walk-air:latest
+```
+
+
+```shell
+netstat -tuln 
 ```
